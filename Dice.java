@@ -7,7 +7,7 @@ public class Dice {
         rng = new Random(seed);
         probMap = new HashMap<>();
 
-        // duplicate rolls
+        // Duplicate rolls.
         probMap.put(0, 2);
         probMap.put(1, 4);
         probMap.put(2, 6);
@@ -15,7 +15,7 @@ public class Dice {
         probMap.put(4, 10);
         probMap.put(5, 12);
 
-        // valid rolls
+        // Valid rolls.
         probMap.put(6, 3);
         probMap.put(7, 3);
         probMap.put(8, 4);
@@ -48,9 +48,14 @@ public class Dice {
         probMap.put(35, 11);
     }
 
-    // Returns the sum of two die,
-    // factoring probability and duplicate rolls.
-    // Return -1 to indicate jail.
+    /**
+     * Returns the sum of two dice rolls. If both die show
+     * the same value, then they are re-rolled with the
+     * duplicate values added on. If duplicates are obtained
+     * for three rolls, then return -1 to indicate Go-to-jail.
+     *
+     * @return Next roll value (-1 if it is Go-to-jail).
+     */
     public int roll() {
         boolean duplicate = true;
         int attempt = 0;
