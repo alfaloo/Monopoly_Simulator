@@ -3,9 +3,74 @@ public class Main {
     private Board board;
     private Dice dice;
 
+    // Input values by user
+    private int inputPlayers;
+    private int[][] inputAssets;
+    private int[] inputHouses;
+    private int[] inputBalance;
+    private int inputCycle;
+    private int inputIteration;
+
+    // Feeding values from within code
     public Main(long seed) {
         this.board = new Board();
         this.dice = new Dice(seed);
+    }
+
+    // Automatically feed values from Scanner
+    public Main() {
+        this.board = new Board();
+
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("Please enter a seed for the dice:");
+        int seed = scan.nextInt();
+        this.dice = new Dice(seed);
+
+        System.out.println("Please enter the number of players:");
+        this.inputPlayers = scan.nextInt();
+
+        this.inputAssets = new int[inputPlayers][];
+        for (int i = 0; i < inputPlayers; i++) {
+            System.out.println(String.format("Please enter the number of owned assets of player %d:", i + 1));
+            int amountOfOwnedAssets = scan.nextInt();
+            this.inputAssets[i] = new int[amountOfOwnedAssets];
+
+            System.out.println(String.format("Please enter the owned assets of player %d:", i + 1));
+            for (int j = 0; j < amountOfOwnedAssets; j++) {
+                this.inputAssets[i][j] = scan.nextInt();
+            }
+        }
+
+        this.inputHouses = new int[inputPlayers];
+        System.out.println("Please enter the amount of houses owned by each player:");
+        for (int i = 0; i < inputPlayers; i++) {
+            this.inputHouses[i] = scan.nextInt();
+        }
+
+        this.inputBalance = new int[inputPlayers];
+        System.out.println("Please enter the balance of each player:");
+        for (int i = 0; i < inputPlayers; i++) {
+            this.inputBalance[i] = scan.nextInt();
+        }
+
+        System.out.println("Please enter the number of cycles to run:");
+        this.inputCycle = scan.nextInt();
+
+        System.out.println("Please enter the number of iterations to average:");
+        this.inputIteration = scan.nextInt();
+
+        System.out.println("Type 'run' to confirm execution:");
+        String confirm = scan.next();
+        while (!confirm.equals("run")) {
+            if (confirm.equals("exit")) {
+                System.exit(0);
+            }
+            confirm = scan.next();
+        }
+
+        this.run(this.inputAssets, this.inputHouses, this.inputBalance, this.inputCycle, this.inputIteration);
+
     }
 
     /**
@@ -203,8 +268,10 @@ public class Main {
         int[] balance = new int[] {2000, 2000, 2000, 2000};
 
         Main main = new Main(1);
-
         main.run(assets, houses, balance, 50, 100);
+
+//        Main main = new Main();
+
         //main.debug();
     }
 }
