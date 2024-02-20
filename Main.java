@@ -264,7 +264,7 @@ public class Main {
                 {12, 28, 31, 32, 34},
                 {26, 27, 29, 37, 39}
         };
-        int[] houses = new int[] {2, 2, 2, 2};
+        int[] houses = new int[] {2, 3, 2, 2};
         int[] balance = new int[] {2000, 2000, 2000, 2000};
 
         Main main = new Main(1);
@@ -272,6 +272,6 @@ public class Main {
 
 //        Main main = new Main();
 
-        //main.debug();
+//         main.debug();
     }
 }
